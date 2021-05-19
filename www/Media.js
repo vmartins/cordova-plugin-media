@@ -189,6 +189,13 @@ Media.prototype.release = function () {
 };
 
 /**
+ * Release all the resources.
+ */
+ Media.prototype.releaseAll = function () {
+    exec(null, null, 'Media', 'releaseAll');
+};
+
+/**
  * Adjust the volume.
  */
 Media.prototype.setVolume = function (volume) {

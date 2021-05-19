@@ -171,6 +171,9 @@ public class AudioHandler extends CordovaPlugin {
             callbackContext.sendPluginResult(new PluginResult(status, b));
             return true;
         }
+        else if (action.equals("releaseAll")) {
+            onDestroy();
+        }
         else if (action.equals("messageChannel")) {
             messageChannel = callbackContext;
             return true;
