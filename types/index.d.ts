@@ -27,6 +27,8 @@ declare var Media: {
  * W3C specification and may deprecate the current APIs.
  */
 interface Media {
+    get(id: string): Media;
+    
     /**
      * Returns the current amplitude within an audio file.
      * @param mediaSuccess The callback that is passed the current amplitude (0.0 - 1.0).
@@ -35,6 +37,7 @@ interface Media {
     getCurrentAmplitude(
         mediaSuccess: (amplitude: number) => void,
         mediaError?: (error: MediaError) => void): void;
+
     /**
      * Returns the current position within an audio file. Also updates the Media object's position parameter.
      * @param mediaSuccess The callback that is passed the current position in seconds.
@@ -43,42 +46,58 @@ interface Media {
     getCurrentPosition(
         mediaSuccess: (position: number) => void,
         mediaError?: (error: MediaError) => void): void;
+
+    getIds(
+        mediaSuccess: (ids: any) => void,
+        mediaError?: (error: MediaError) => void
+    ): void;
+
     /** Returns the duration of an audio file in seconds. If the duration is unknown, it returns a value of -1. */
     getDuration(): number;
+
     /** 
      * Starts or resumes playing an audio file.
      * @param iosPlayOptions: iOS options quirks
      */
     play(iosPlayOptions?: IosPlayOptions): void;
+
     /** Pauses playing an audio file. */
     pause(): void;
+
     /**
      * Releases the underlying operating system's audio resources. This is particularly important
      * for Android, since there are a finite amount of OpenCore instances for media playback.
      * Applications should call the release function for any Media resource that is no longer needed.
      */
     release(): void;
+
     /**
      * Sets the current position within an audio file.
      * @param position Position in milliseconds.
      */
     seekTo(position: number): void;
+
     /**
      * Set the volume for an audio file.
      * @param volume The volume to set for playback. The value must be within the range of 0.0 to 1.0.
      */
     setVolume(volume: number): void;
+
     /** Starts recording an audio file. */
     startRecord(): void;
+
     /** Stops recording an audio file. */
     stopRecord(): void;
+
     /** Stops playing an audio file. */
     stop(): void;
+
     /**
      * The position within the audio playback, in seconds.
      * Not automatically updated during play; call getCurrentPosition to update.
      */
     position: number;
+
     /** The duration of the media, in seconds. */
     duration: number;
 }

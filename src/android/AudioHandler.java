@@ -161,6 +161,11 @@ public class AudioHandler extends CordovaPlugin {
             callbackContext.sendPluginResult(new PluginResult(status, f));
             return true;
         }
+        else if (action.equals("getIds")) {
+            JSONArray ids = this.getIds();
+            callbackContext.sendPluginResult(new PluginResult(status, ids));
+            return true;
+        }
         else if (action.equals("create")) {
             String id = args.getString(0);
             String src = FileHelper.stripFileProtocol(args.getString(1));
@@ -177,7 +182,8 @@ public class AudioHandler extends CordovaPlugin {
         else if (action.equals("messageChannel")) {
             messageChannel = callbackContext;
             return true;
-        } else if (action.equals("getCurrentAmplitudeAudio")) {
+        }
+        else if (action.equals("getCurrentAmplitudeAudio")) {
             float f = this.getCurrentAmplitudeAudio(args.getString(0));
             callbackContext.sendPluginResult(new PluginResult(status, f));
             return true;
@@ -370,6 +376,19 @@ public class AudioHandler extends CordovaPlugin {
         }
         return -1;
     }
+
+    /**
+     * Get ids
+     * @return
+     */
+    public JSONArray getIds() {
+        ArrayList<String> ids = new ArrayList<String>();
+        for (AudioPlayer audio : this.players.values()) {
+            ids.add(audio.getId());
+        }
+        return new JSONArray(ids);
+    }
+
 
     /**
      * Get the duration of the audio file.

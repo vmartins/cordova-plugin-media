@@ -72,6 +72,21 @@ Media.get = function (id) {
 };
 
 /**
+ * Get IDs.
+ */
+ Media.getIds = function (success, fail) {
+    exec(success, fail, 'Media', 'getIds');
+};
+
+/**
+ * Release all the resources.
+ */
+ Media.releaseAll = function () {
+    console.log('Media.js releaseAll')
+    exec(null, null, 'Media', 'releaseAll');
+};
+
+/**
  * Start or resume playing audio file.
  */
 Media.prototype.play = function (options) {
@@ -125,6 +140,10 @@ Media.prototype.pause = function () {
  */
 Media.prototype.getDuration = function () {
     return this._duration;
+};
+
+Media.prototype.getId = function () {
+    return this.id;
 };
 
 /**
@@ -186,13 +205,6 @@ Media.prototype.release = function () {
         'release',
         [this.id]
     );
-};
-
-/**
- * Release all the resources.
- */
- Media.prototype.releaseAll = function () {
-    exec(null, null, 'Media', 'releaseAll');
 };
 
 /**

@@ -428,6 +428,15 @@ public class AudioPlayer implements OnCompletionListener, OnPreparedListener, On
     }
 
     /**
+     * Get id.
+     *
+     * @return
+     */
+    public String getId() {
+        return this.id;
+    }
+
+    /**
      * Determine if playback file is streaming or local.
      * It is streaming if file name starts with "http://"
      *
